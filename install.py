@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-in_file='compile_py_to_ELF.py'
+in_file='py2elf.py'
 output='py2elf'
 os.system(f'cython3 {in_file} -o {output}_temp.c --embed')
 os.system(f'gcc -Os -I /usr/include/python3.8  {output}_temp.c -o {output} -lpython3.8 -lpthread -lm -lutil -ldl')
