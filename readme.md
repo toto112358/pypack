@@ -1,7 +1,7 @@
 # PYPACK !!!
 Just a simple python3 package manager & compiler
 
-known issues
+Known issues:
 ------------
 - Somehow, the pypack script will NEVER be able to compile a python file, even when I make it using the working py2elf script
 
