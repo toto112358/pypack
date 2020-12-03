@@ -10,16 +10,24 @@ def get_random_string(length):
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str 
 
-# def prepend(file, line):                                            # Add line + \n to the begining of a file
-    # temp_file='/tmp/pypacktemp-'+get_random_string(20)
-    # temp_f=open(temp_file,'w')
-    # temp_f.write(line+'\n')
-    # with open(file,'r') as f:
-        # for l in f.readlines:
-            # temp_f.write(l)
-    # temp_f.close()
-    # os.system(f'mv {temp_file} {file}')
+def pkg_add(pkg,packagelst):                                           # pkg_add pkg full location + full path to package.lst
+    with open(packagelst, 'a') as f:
+        f.write(pkg+'\n')
 
+def pkg_purge(pkg,packagelst):
+    with open(packagelst, 'r') as f:
+        lines=f.readlines()
+    with open(packagelst, 'w') as f:
+        for line in lines:
+            if line.strip('\n')  != pkg:
+                f.write(line)
+    os.system(f'rm {pkg}')
+
+def pkg_purge_all(packagelst):
+    with open(packagelst, 'r') as f:
+        for line in f.readline()
+            os.system(f'rm {line}')
+    os.system(f'rm {packagelst} && touch {packagelst}')
 def line_prepender(filename, line):
     with open(filename, 'r+') as f:
         content = f.read()
@@ -58,7 +66,7 @@ if args.i and not bool(args.no_compile):                            # Here we do
         exit(f'[error] /usr/bin/{out_file} exists!')
     py2elf(working_dir+'/'+in_file,temp_file)
     os.system(f'chmod +x {temp_file} && sudo mv {temp_file} /usr/bin/{out_file}')
-                                                                    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
+    pkg_add(f'/usr/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
 if args.i and bool(args.no_compile):                                # Here we don't compile the python file to an ELF
     out_file=args.i
@@ -82,4 +90,9 @@ if args.i and bool(args.no_compile):                                # Here we do
 
 # PART OF CODE TO REMOVE PACKAGE
 # ------------------------------
-
+if args.purge:
+    pkg2purge=args.purge
+    if pkg2purge == '*':                                            # We remove ALL installed pkg
+        pkg_purge_all(pypack_dir+pypack_packagelst)
+    else:                                                           # We only remove specified pkg
+        pkg_purge(f'/usr/bin/{pkg2purge}',pypack_dir+pypack_packagelst) 
