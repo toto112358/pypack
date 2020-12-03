@@ -15,9 +15,9 @@ Usage:
 ------
 Run `sudo pypack -h` to get all commands. Here are a few basic examples:
 
-Run `sudo pypack -i foo -f foo.py` to install `foo.py` as the command `foo`
+Run `sudo pypack -i foo -f foo.py` to **install** `foo.py` as the command `foo`
 
-Run `sudo pypack -p foo` to uninstall the `foo` package you just installed
+Run `sudo pypack -p foo` to **uninstall** the `foo` package you just installed
 
 Run `sudo pypack -p '*'` *(or `sudo pypack -p \*`)* in order to uninstall **ALL** pypack packages (except pypack, py2elf)
 
@@ -34,10 +34,11 @@ To do:
 4. Add a --update option to update python3 program
 5. Add a [cheat sheet](cheat_sheet.md)
 6. Add an option to show all installed packages
-7. Make pypack **fool-proof**
-8. Ask community to make commits on my script
-9. Add support for python3 project that need MULTIPLE files
-10. Add some VIM propaganda in easter eggs
+7. Add a package repository
+8. Make pypack **fool-proof**
+9. Ask community to make commits on my script
+10. Add support for python3 project that need MULTIPLE files
+11. Add some VIM propaganda in easter eggs
 
 
 
