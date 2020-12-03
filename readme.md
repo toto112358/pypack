@@ -1,6 +1,8 @@
 # PYPACK !!!
 Just a simple python3 package manager & compiler
 
+Compiling python3 programs to ELF makes them considerably faster.
+
 Install:
 --------
 Run `sudo make dependencies` to install all required packages, then `sudo make install` to install pypack.
