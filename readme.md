@@ -22,7 +22,7 @@ Run `sudo pypack -p '*'` *(or `sudo pypack -p \*`)* in order to uninstall **ALL*
 Known issues:
 ------------
 - Update package not coded yet
-- pypack -p * won't work since bash interprets * as everything. So you have to escape the '*' character
+- `pypack -p *` won't work since bash interprets `*` as everything. So you have to escape the `*` character
 
 To do:
 ------
