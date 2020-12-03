@@ -24,10 +24,18 @@ def pkg_purge(pkg,packagelst):
     os.system(f'rm {pkg}')
 
 def pkg_purge_all(packagelst):
+    exceptions=[]                                                   # List of packages we skipped (pypack, py2elf by default)
+    print('removing all pypack packages excluding pypack, py2elf')
     with open(packagelst, 'r') as f:
-        for line in f.readline()
-            os.system(f'rm {line}')
+        for line in f.readline():
+            if line[-6:] == 'pypack' or line[:-6] == 'py2elf':
+                exceptions.append(line)
+                os.system(f'rm {line}')
     os.system(f'rm {packagelst} && touch {packagelst}')
+    with open(packagelst,'w') as f:
+        for line in exceptions:
+            f.write(line)
+    
 def line_prepender(filename, line):
     with open(filename, 'r+') as f:
         content = f.read()
@@ -50,8 +58,9 @@ if os.geteuid() != 0:
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-i', help='specify name of the package to install (e.g. pypack -i foo -f bar.py will install bar.py and it will be installed in /usr/bin/foo)')
-parser.add_argument('-f', help='specify the python3 package to install')
-parser.add_argument('-p', '--purge', help='uninstall specified package')
+parser.add_argument('-f', help='specify the python3 package to install or update')
+parser.add_argument('-p', '--purge', help='uninstall specified package (uninstalling package '*' is equivalent to removing all packages but py2elf and pypack)')
+parser.add_argument('-u', '--update', help='specify the name of the package to update')
 parser.add_argument('-n', '--no-compile', help='if --no-compile is specified, the script will be installed without being compiled',action='count')
 args=parser.parse_args()
 
@@ -78,15 +87,12 @@ if args.i and bool(args.no_compile):                                # Here we do
             print(f'{line1} in 1st line. that\'s cool!')
         else:
             #thats not cool
-            need2change=1
-    if need2change:
-        #Let's suppose we use python3
-        line_prepender(in_file,'#!/usr/bin/python3')
-        #if in_file[-3:] == '.py':
-        #    extention=1
+            #Let's suppose we use python3
+            line_prepender(in_file,'#!/usr/bin/python3')
     if os.path.isfile(f'/usr/bin/{out_file}'):                      # if file exists: exit with error
         exit('[error] /usr/bin/{out_file} exists!')
     os.system(f'chmod +x {in_file} && cp {in_file} /usr/bin/{out_file}')
+    pkg_add(f'/usr/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
 # PART OF CODE TO REMOVE PACKAGE
 # ------------------------------
@@ -96,3 +102,12 @@ if args.purge:
         pkg_purge_all(pypack_dir+pypack_packagelst)
     else:                                                           # We only remove specified pkg
         pkg_purge(f'/usr/bin/{pkg2purge}',pypack_dir+pypack_packagelst) 
+
+# PART OF CODE TO UPDATE EXISTING PACKAGE
+# ---------------------------------------
+if args.update and args.f:
+    pass
+    # need to check if package is installed
+    # if not installed : error
+    # Yes ? Ok. Then proceed to installation
+    # if package is py2elf or pypack, display warning + confirmation
