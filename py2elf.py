@@ -15,6 +15,6 @@ parser.add_argument('file_to_compile', help='Select python3 file to compile to E
 args = parser.parse_args()
 in_file=args.file_to_compile
 output=args.o
-os.system(f'cython3 {in_file} -o /tmp/{random_temp}.c --embed')
+os.system(f'cython3 -o /tmp/{random_temp}.c --embed {in_file}')
 os.system(f'gcc -Os -I /usr/include/python3.8  /tmp/{random_temp}.c -o {output} -lpython3.8 -lpthread -lm -lutil -ldl')
 os.system(f'rm /tmp/{random_temp}.c')

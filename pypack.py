@@ -28,15 +28,15 @@ def line_prepender(filename, line):
 def py2elf(imput,output):
     if os.path.isfile('/usr/bin/py2elf'):                           # if py2elf installed
         os.system(f'py2elf -o {output} {imput}') 
-    elif os.path.isfile('./py2elf'):                                # if py2elf installed
-        os.system(f'./py2elf.py -o {output} {imput}')                  # if py2elf in same directory
+    elif os.path.isfile('./py2elf.py'):                                # if py2elf installed
+        os.system(f'./py2elf.py -o {output} {imput}')               # if py2elf in same directory
     else:
         exit('py2elf not found')
 
 
 pypack_dir='/var/lib/pypack/'                                       # Directory where we will have necessary files for pypack to work properly
 pypack_packagelst='packages.lst'                                    # File where all stored packages are listed
-
+working_dir=os.popen('pwd').read()[:-1]
 if os.geteuid() != 0:
     exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
 
@@ -53,11 +53,11 @@ args=parser.parse_args()
 if args.i and not bool(args.no_compile):                            # Here we do compile the python file to an ELF
     out_file=args.i
     in_file=args.f
-    temp_file='out'+get_random_string(20)
+    temp_file='/tmp/out'+get_random_string(20)
     if os.path.isfile(f'/usr/bin/{out_file}'):                      # if file exists: exit with error
         exit(f'[error] /usr/bin/{out_file} exists!')
-    py2elf(in_file,temp_file)
-    os.system(f'chmod +x {temp_file} && sudo mv {temp_file}.bin /usr/bin/{out_file}')
+    py2elf(working_dir+'/'+in_file,temp_file)
+    os.system(f'chmod +x {temp_file} && sudo mv {temp_file} /usr/bin/{out_file}')
                                                                     # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
 if args.i and bool(args.no_compile):                                # Here we don't compile the python file to an ELF
@@ -72,7 +72,7 @@ if args.i and bool(args.no_compile):                                # Here we do
             #thats not cool
             need2change=1
     if need2change:
-        #Lets suppose we use python3
+        #Let's suppose we use python3
         line_prepender(in_file,'#!/usr/bin/python3')
         #if in_file[-3:] == '.py':
         #    extention=1
