@@ -9,4 +9,4 @@ uninstall:
 	sudo rm /usr/bin/pypack
 	sudo rm /usr/bin/py2elf
 dependencies:
-	sudo apt -y install gcc cython3 python-pip3 python3-lxml
+	sudo apt -y install gcc cython3 python3-pip python3-lxml
