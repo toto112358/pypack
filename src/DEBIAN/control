@@ -1,0 +1,9 @@
+Package: pypack
+Version: 0.01
+Section: base
+Priority: important
+Architecture: amd64
+Depends: gcc, cython3, python3-pip, python3-lxml    
+Maintainer: toto112358
+Description: PyPack
+ PyPack is a simple python3 package manager & compiler

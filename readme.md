@@ -2,6 +2,10 @@
 Just a simple python3 package manager & compiler
 
 Compiling python3 programs to ELF makes them considerably faster.
+Compiling
+---------
+Run `make build` to compile it to a 64-bit .deb package you can later install
+Run `make clean` to remove all compiled binaries
 
 Install:
 --------
@@ -28,9 +32,9 @@ Known issues:
 
 To do:
 ------
-1. Add option to detect python3 version installed
-2. Add dependencies support (e.g. a python package can be dependant on another one)
-3. Create a .PYPACK package extention
+1. Add dependencies support (e.g. a python package can be dependant on another one)
+3. Add configuration file to customize install 
+4. Create a .PYPACK package extention
     - Dependencies support
     - Instructions to install and/or uninstall properly
 5. Add package versionning to downgrade packages to backed-up versions
