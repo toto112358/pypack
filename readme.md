@@ -25,7 +25,6 @@ Known issues:
 ------------
 - Update package not coded yet
 - `pypack -p *` won't work since bash interprets `*` as everything. So you have to escape the `*` character
-- **ONLY** works with python3.8 at the moment
 
 To do:
 ------
