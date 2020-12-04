@@ -32,8 +32,8 @@ To do:
 1. Add option to detect python3 version installed
 2. Add dependencies support (e.g. a python package can be dependant on another one)
 3. Create a .PYPACK package extention
-    -> Dependencies support
-    -> Instructions to install and/or uninstall properly
+    - Dependencies support
+    - Instructions to install and/or uninstall properly
 5. Add package versionning to downgrade packages to backed-up versions
 6. Add seamless package install by installing all packages in a pypack directory but creating symbolic links
 7. Add a --update option to update python3 program
