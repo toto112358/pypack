@@ -1,7 +1,8 @@
 # PYPACK !!!
-Just a simple python3 package manager & compiler for debian-based linux distributions
+Just a simple python3 package manager & compiler
 
 Compiling python3 programs to ELF makes them considerably faster.
+
 Compiling
 ---------
 Run `make` to compile it to a 64-bit .deb package you can later install
