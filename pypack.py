@@ -10,18 +10,23 @@ def get_random_string(length):
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str 
 
-def pkg_add(pkg,packagelst):                                           # pkg_add pkg full location + full path to package.lst
+def pkg_add(pkg,packagelst):                                        # pkg_add pkg full location + full path to package.lst
     with open(packagelst, 'a') as f:
         f.write(pkg+'\n')
 
 def pkg_purge(pkg,packagelst):
+    package_installed=False                                         # FOOL PROOF: check if pkg already installed
     with open(packagelst, 'r') as f:
         lines=f.readlines()
     with open(packagelst, 'w') as f:
         for line in lines:
             if line.strip('\n')  != pkg:
                 f.write(line)
-    os.system(f'rm {pkg}')
+            else:
+                package_installed=True
+    if package_installed:
+        os.system(f'rm {pkg}')
+        
 
 def pkg_purge_all(packagelst):
     exceptions=[]                                                   # List of packages we skipped (pypack, py2elf by default)
