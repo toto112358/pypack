@@ -8,10 +8,10 @@ clean:
 install:
 	sudo mkdir /var/lib/pypack/
 	sudo touch /var/lib/pypack/packages.lst
-	sudo python3 scr/pypack.py -i py2elf -f scr/py2elf.py
-	sudo python3 scr/pypack.py -i pypack -f scr/pypack.py
+	sudo python3 src/pypack.py -i py2elf -f src/py2elf.py
+	sudo python3 src/pypack.py -i pypack -f src/pypack.py
 uninstall:
-	sudo python3 scr/pypack.py -p '*'
+	sudo python3 src/pypack.py -p '*'
 	sudo rm -r /var/lib/pypack
 	sudo rm /usr/bin/pypack
 	sudo rm /usr/bin/py2elf
