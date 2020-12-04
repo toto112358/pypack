@@ -31,16 +31,18 @@ To do:
 ------
 1. Add option to detect python3 version installed
 2. Add dependencies support (e.g. a python package can be dependant on another one)
-3. Add package versionning to downgrade packages to backed-up versions
-4. Add seamless package install by installing all packages in a pypack directory but creating symbolic links
-5. Add a --update option to update python3 program
-6. Add a [cheat sheet](cheat_sheet.md)
-7. Add an option to show all installed packages
-8. Add a package repository
-9. Make pypack **fool-proof** (it already seems pretty fool-proof)
-10. Ask community to make commits on my script
-11. Add support for python3 project that need MULTIPLE files
-12. Add some VIM propaganda in easter eggs
+3. Create a .PYPACK package extention
+    -> Dependencies support
+    -> Instructions to install and/or uninstall properly
+5. Add package versionning to downgrade packages to backed-up versions
+6. Add seamless package install by installing all packages in a pypack directory but creating symbolic links
+7. Add a --update option to update python3 program
+8. Add a [cheat sheet](cheat_sheet.md)
+9. Add an option to show all installed packages
+10. Add a package repository
+11. Ask community to make commits on my script
+12. Add support for python3 project that need MULTIPLE files
+13. Add some VIM propaganda in easter eggs
 
 
 
