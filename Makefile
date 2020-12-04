@@ -6,10 +6,7 @@ clean:
 	rm src/usr/bin/*
 	rm pypack.deb
 install:
-	sudo mkdir /var/lib/pypack/
-	sudo touch /var/lib/pypack/packages.lst
-	sudo python3 src/pypack.py -i py2elf -f src/py2elf.py
-	sudo python3 src/pypack.py -i pypack -f src/pypack.py
+	make -C src/
 uninstall:
 	sudo python3 src/pypack.py -p '*'
 	sudo rm -r /var/lib/pypack
