@@ -21,13 +21,13 @@ Run `sudo make uninstall` or if you installed it via dpkg run `sudo dpkg --purge
 
 Usage:
 ------
-Run `sudo pypack -h` to get all commands. Here are a few basic examples:
+Run `pypack -h` to get all commands. Here are a few basic examples:
 
-Run `sudo pypack -i foo -f foo.py` to **install** `foo.py` as the command `foo`
+Run `pypack -i foo -f foo.py` to **install** `foo.py` as the command `foo`
 
-Run `sudo pypack -p foo` to **uninstall** the `foo` package you just installed
+Run `pypack -p foo` to **uninstall** the `foo` package you just installed
 
-Run `sudo pypack -p '*'` *(or `sudo pypack -p \*`)* in order to uninstall **ALL** pypack packages (except pypack, py2elf)
+Run `pypack -p '*'` *(or `sudo pypack -p \*`)* in order to uninstall **ALL** pypack packages (except pypack, py2elf)
 
 Known issues:
 ------------
