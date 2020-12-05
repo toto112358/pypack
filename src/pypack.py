@@ -47,7 +47,7 @@ def line_prepender(filename, line):
         f.seek(0, 0)
         f.write(line.rstrip('\r\n') + '\n' + content)
 def py2elf(imput,output):
-    if os.path.isfile('/usr/bin/py2elf'):                           # if py2elf installed
+    if os.path.isfile('/opt/pypack/bin/py2elf'):                           # if py2elf installed
         os.system(f'py2elf -o {output} {imput}') 
     elif os.path.isfile('./py2elf.py'):                                # if py2elf installed
         os.system(f'./py2elf.py -o {output} {imput}')               # if py2elf in same directory
@@ -58,11 +58,12 @@ def py2elf(imput,output):
 pypack_dir='/var/lib/pypack/'                                       # Directory where we will have necessary files for pypack to work properly
 pypack_packagelst='packages.lst'                                    # File where all stored packages are listed
 working_dir=os.popen('pwd').read()[:-1]
-if os.geteuid() != 0:
-    exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
+#if os.geteuid() == 0:
+#    exit("You don't need to have root privileges to run this script.\nPlease try again this time without 'sudo'. Exiting")
+
 
 parser=argparse.ArgumentParser()
-parser.add_argument('-i', help='specify name of the package to install (e.g. pypack -i foo -f bar.py will install bar.py and it will be installed in /usr/bin/foo)')
+parser.add_argument('-i', help='specify name of the package to install (e.g. pypack -i foo -f bar.py will install bar.py and it will be installed in /opt/pypack/bin/foo)')
 parser.add_argument('-f', help='specify the python3 package to install or update')
 parser.add_argument('-p', '--purge', help='uninstall specified package (uninstalling package \\* is equivalent to removing all packages but py2elf and pypack)')
 parser.add_argument('-u', '--update', help='specify the name of the package to update')
@@ -76,28 +77,28 @@ if args.i and not bool(args.no_compile):                            # Here we do
     out_file=args.i
     in_file=args.f
     temp_file='/tmp/out'+get_random_string(20)
-    if os.path.isfile(f'/usr/bin/{out_file}'):                      # if file exists: exit with error
-        exit(f'[error] /usr/bin/{out_file} exists!')
+    if os.path.isfile(f'/opt/pypack/bin/{out_file}'):                      # if file exists: exit with error
+        exit(f'[error] /opt/pypack/bin/{out_file} exists!')
     py2elf(working_dir+'/'+in_file,temp_file)
-    os.system(f'chmod +x {temp_file} && sudo mv {temp_file} /usr/bin/{out_file}')
-    pkg_add(f'/usr/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
+    os.system(f'chmod +x {temp_file} && mv {temp_file} /opt/pypack/bin/{out_file}')
+    pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
 if args.i and bool(args.no_compile):                                # Here we don't compile the python file to an ELF
     out_file=args.i
     in_file=args.f
     with open(in_file,'r') as f:
         line1=f.readline()
-        if '#!/usr/bin/python' in line1:
+        if '#!/opt/pypack/bin/python' in line1:
             #thats cool
             print(f'{line1} in 1st line. that\'s cool!')
         else:
             #thats not cool
             #Let's suppose we use python3
-            line_prepender(in_file,'#!/usr/bin/python3')
-    if os.path.isfile(f'/usr/bin/{out_file}'):                      # if file exists: exit with error
-        exit('[error] /usr/bin/{out_file} exists!')
-    os.system(f'chmod +x {in_file} && cp {in_file} /usr/bin/{out_file}')
-    pkg_add(f'/usr/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
+            line_prepender(in_file,'#!/opt/pypack/bin/python3')
+    if os.path.isfile(f'/opt/pypack/bin/{out_file}'):                      # if file exists: exit with error
+        exit('[error] /opt/pypack/bin/{out_file} exists!')
+    os.system(f'chmod +x {in_file} && cp {in_file} /opt/pypack/bin/{out_file}')
+    pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
 # PART OF CODE TO REMOVE PACKAGE
 # ------------------------------
@@ -106,7 +107,7 @@ if args.purge:
     if pkg2purge == '*':                                            # We remove ALL installed pkg
         pkg_purge_all(pypack_dir+pypack_packagelst)
     else:                                                           # We only remove specified pkg
-        pkg_purge(f'/usr/bin/{pkg2purge}',pypack_dir+pypack_packagelst) 
+        pkg_purge(f'/opt/pypack/bin/{pkg2purge}',pypack_dir+pypack_packagelst) 
 
 # PART OF CODE TO UPDATE EXISTING PACKAGE
 # ---------------------------------------

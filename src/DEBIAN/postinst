@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+import os
+HOME=os.popen('echo $HOME').read()[:-1]
+needle='export PATH=$PATH:/opt/pypack/bin'
+
+with open(f'{HOME}/.bashrc', "r+") as file:
+    for line in file:
+        if needle in line:
+            break
+        else: # not found, we are at the eof
+            file.write(needle) # append missing data
+os.system('chmod -R 777 /opt/pypack/')
+os.system('chmod -R 777 /var/lib/pypack/')
