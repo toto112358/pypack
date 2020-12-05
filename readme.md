@@ -1,5 +1,5 @@
 # PYPACK !!!
-Just a simple python3 package manager & compiler
+Just a simple python3 package manager & compiler. It doesn't even require root access!!!
 
 Compiling python3 programs to ELF makes them considerably faster.
 
@@ -11,11 +11,13 @@ Run `make clean` to remove all compiled binaries
 
 Install:
 --------
-Run `sudo make dependencies` to install all required packages, then `sudo make install` to install pypack.
+Two ways:
+- Run `sudo make dependencies` to install all required packages, then `sudo make install` to install pypack.
+- Or run `sudo make dependencies && make && dpkg -i pypack.deb && make clean` on debian-based distributions.
 
 Uninstall:
 ---------
-Run `sudo make uninstall`
+Run `sudo make uninstall` or if you installed it via dpkg run `sudo dpkg --purge pypack`
 
 Usage:
 ------
@@ -35,15 +37,14 @@ Known issues:
 To do:
 ------
 1. Add dependencies support (e.g. a python package can be dependant on another one)
-3. Add configuration file to customize install 
+3. Add configuration file to customize install (i.e. install root version or non-root)
 4. Create a .PYPACK package extention
     - Dependencies support
     - Instructions to install and/or uninstall properly
-5. Add package versionning to downgrade packages to backed-up versions
-6. Add seamless package install by installing all packages in a pypack directory but creating symbolic links
-7. Add a --update option to update python3 program
+5. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
+7. **Add a --update option to update python3 program** (URGENT)
 8. Add a [cheat sheet](cheat_sheet.md)
-9. Add an option to show all installed packages
+9. Add an option to show all installed packages (PRIORITY)
 10. Add a package repository
 11. Ask community to make commits on my script
 12. Add support for python3 project that need MULTIPLE files
