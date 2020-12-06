@@ -3,6 +3,9 @@ Just a simple python3 package manager & compiler. It doesn't even require root a
 
 Compiling python3 programs to ELF makes them considerably faster.
 
+Check out our new [repository](https://github.com/toto112358/pypack-repo)
+
+
 Compiling
 ---------
 Run `make` to compile it to a 64-bit .deb package you can later install
@@ -42,13 +45,13 @@ To do:
     - Dependencies support
     - Instructions to install and/or uninstall properly
 6. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
-7. **Add a --update option to update python3 program** (URGENT)
 8. Add a [cheat sheet](cheat_sheet.md)
 9. Add an option to show all installed packages (PRIORITY)
 10. Add a package repository
-11. Ask community to make commits on my script
-12. Add support for python3 project that need MULTIPLE files
-13. Add some VIM propaganda in easter eggs
+    - `pypack repo install [pkg name]` would download and install [pkg name]
+12. Ask community to make commits on my script
+13. Add support for python3 project that need MULTIPLE files
+14. Add some VIM propaganda in easter eggs
 
 
 
