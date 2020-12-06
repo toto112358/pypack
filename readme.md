@@ -31,17 +31,17 @@ Run `pypack -p '*'` *(or `pypack -p \*`)* in order to uninstall **ALL** pypack p
 
 Known issues:
 ------------
-- Update package not coded yet
 - `pypack -p *` won't work since bash interprets `*` as everything. So you have to escape the `*` character
 
 To do:
 ------
 1. Add dependencies support (e.g. a python package can be dependant on another one)
-3. Add configuration file to customize install (i.e. install root version or non-root)
-4. Create a .PYPACK package extention
+3. Make pypack installation for ALL users instead of current user only
+4. Add configuration file to customize install (i.e. install root version or non-root)
+5. Create a .PYPACK package extention
     - Dependencies support
     - Instructions to install and/or uninstall properly
-5. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
+6. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
 7. **Add a --update option to update python3 program** (URGENT)
 8. Add a [cheat sheet](cheat_sheet.md)
 9. Add an option to show all installed packages (PRIORITY)
