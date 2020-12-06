@@ -3,4 +3,4 @@
 # ignore compiled binaries
 src/opt/pypack/bin/*
 # keep dir src
-!.src/opt/pypack/bin
+!.src/opt/pypack/bin/.gitkeep
