@@ -17,7 +17,7 @@ Two ways:
 
 Uninstall:
 ---------
-Run `sudo make uninstall` or if you installed it via dpkg run `sudo dpkg --purge pypack`
+Run `sudo make uninstall` or if you installed it via dpkg run `sudo dpkg --purge pypack && sudo rm -r /opt/pypack`
 
 Usage:
 ------

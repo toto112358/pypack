@@ -5,6 +5,7 @@ build:
 clean:
 	rm src/opt/pypack/bin/*
 	rm pypack.deb
+
 install:
 	make -C src/
 uninstall:

@@ -57,6 +57,7 @@ def py2elf(imput,output):
 
 pypack_dir='/var/lib/pypack/'                                       # Directory where we will have necessary files for pypack to work properly
 pypack_packagelst='packages.lst'                                    # File where all stored packages are listed
+pypath=os.popen('which python3').read()[:-1]                         # Py3 directory
 working_dir=os.popen('pwd').read()[:-1]
 #if os.geteuid() == 0:
 #    exit("You don't need to have root privileges to run this script.\nPlease try again this time without 'sudo'. Exiting")
@@ -73,7 +74,7 @@ args=parser.parse_args()
 # PART OF CODE TO INSTALL PACKAGE
 # -------------------------------
 
-if args.i and not bool(args.no_compile):                            # Here we do compile the python file to an ELF
+if args.i and not bool(args.no_compile) and args.f:                            # Here we do compile the python file to an ELF
     out_file=args.i
     in_file=args.f
     temp_file='/tmp/out'+get_random_string(20)
@@ -83,7 +84,7 @@ if args.i and not bool(args.no_compile):                            # Here we do
     os.system(f'chmod +x {temp_file} && mv {temp_file} /opt/pypack/bin/{out_file}')
     pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
-if args.i and bool(args.no_compile):                                # Here we don't compile the python file to an ELF
+if args.i and bool(args.no_compile) and args.f:                                # Here we don't compile the python file to an ELF
     out_file=args.i
     in_file=args.f
     with open(in_file,'r') as f:
@@ -94,9 +95,9 @@ if args.i and bool(args.no_compile):                                # Here we do
         else:
             #thats not cool
             #Let's suppose we use python3
-            line_prepender(in_file,'#!/opt/pypack/bin/python3')
+            line_prepender(in_file,f'#!{pypath}')
     if os.path.isfile(f'/opt/pypack/bin/{out_file}'):                      # if file exists: exit with error
-        exit('[error] /opt/pypack/bin/{out_file} exists!')
+        exit(f'[error] /opt/pypack/bin/{out_file} exists!')
     os.system(f'chmod +x {in_file} && cp {in_file} /opt/pypack/bin/{out_file}')
     pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
 
@@ -111,9 +112,33 @@ if args.purge:
 
 # PART OF CODE TO UPDATE EXISTING PACKAGE
 # ---------------------------------------
-if args.update and args.f:
-    pass
+if args.update and args.f and not bool(args.no_compile):                # Here we compile to ELF
     # need to check if package is installed
     # if not installed : error
     # Yes ? Ok. Then proceed to installation
     # if package is py2elf or pypack, display warning + confirmation
+    out_file=args.update
+    in_file=args.f
+    temp_file='/tmp/out'+get_random_string(20)
+    if not os.path.isfile(f'/opt/pypack/bin/{out_file}'):                      # if file exists: exit with error
+        exit(f'[error] /opt/pypack/bin/{out_file} doesn\'t exist!')
+    py2elf(working_dir+'/'+in_file,temp_file)
+    os.system(f'chmod +x {temp_file} && mv {temp_file} /opt/pypack/bin/{out_file}')
+    pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
+
+if args.update and bool(args.no_compile) and args.f:                                # Here we don't compile the python file to an ELF
+    out_file=args.update
+    in_file=args.f
+    with open(in_file,'r') as f:
+        line1=f.readline()
+        if '#!/opt/pypack/bin/python' in line1:
+            #thats cool
+            print(f'{line1} in 1st line. that\'s cool!')
+        else:
+            #thats not cool
+            #Let's suppose we use python3
+            line_prepender(in_file,f'#!{pypath}')
+    if not os.path.isfile(f'/opt/pypack/bin/{out_file}'):                      # if file exists: exit with error
+        exit(f'[error] /opt/pypack/bin/{out_file} doesn\'t exist!')
+    os.system(f'chmod +x {in_file} && cp {in_file} /opt/pypack/bin/{out_file}')
+    pkg_add(f'/opt/pypack/bin/{out_file}',pypack_dir+pypack_packagelst)    # NEED TO ADD THE INSTALLED PACKAGE TO PACKAGE.LST FOR LATER UNINSTALL !!!
