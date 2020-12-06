@@ -8,6 +8,7 @@ clean:
 
 install:
 	make -C src/
+	export $(PATH) = $(PATH):/opt/pypack/bin/
 uninstall:
 	sudo python3 src/pypack.py -p '*'
 	sudo rm -r /var/lib/pypack
