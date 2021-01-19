@@ -56,7 +56,7 @@ To do:
     - Instructions to install and/or uninstall properly
 6. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
 8. Add a [cheat sheet](cheat_sheet.md)
-	- edit: I want this software to be so stupid that a cheat cheat wont be necessary
+	- edit: I want this software to be so stupid that a cheat sheet wont be necessary
 10. Add an option to show all installed packages (PRIORITY)
 11. Add a package repository
     - `pypack repo install [pkg name]` would download and install [pkg name]
