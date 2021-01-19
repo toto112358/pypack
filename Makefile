@@ -14,6 +14,10 @@ install:
 	make build
 	make -C src/
 
+stupid_install:
+	echo this is a stupid install for debian
+	make dependencies && make && dpkg -i pypack.deb && make clean
+
 uninstall:
 	sudo python3 src/pypack.py -p '*'
 	sudo rm -r /var/lib/pypack

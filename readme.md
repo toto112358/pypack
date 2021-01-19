@@ -15,7 +15,9 @@ Run `make clean` to remove all compiled binaries
 Install:
 --------
 ### Debian-based distros
-- Run `sudo make dependencies && make && dpkg -i pypack.deb && make clean` on debian-based distributions.
+- ~Run `make dependencies && make && dpkg -i pypack.deb && make clean` on debian-based distributions.~
+
+-> Instead, run `make stupid_install`
 
 ### Any other distros
 - Run `make -s print_dependencies` and pipe the output with `xargs` to the package manager of your choice or install them manually.
