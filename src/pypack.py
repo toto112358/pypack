@@ -8,7 +8,7 @@ import string
 def get_random_string(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
-    return result_str 
+    return result_str
 
 def pkg_add(pkg,packagelst):                                        # pkg_add pkg full location + full path to package.lst
     with open(packagelst, 'a') as f:
@@ -26,7 +26,7 @@ def pkg_purge(pkg,packagelst):
                 package_installed=True
     if package_installed:
         os.system(f'rm {pkg}')
-        
+
 
 def pkg_purge_all(packagelst):
     exceptions=[]                                                   # List of packages we skipped (pypack, py2elf by default)
@@ -40,7 +40,7 @@ def pkg_purge_all(packagelst):
     with open(packagelst,'w') as f:
         for line in exceptions:
             f.write(line)
-    
+
 def line_prepender(filename, line):
     with open(filename, 'r+') as f:
         content = f.read()
@@ -48,7 +48,7 @@ def line_prepender(filename, line):
         f.write(line.rstrip('\r\n') + '\n' + content)
 def py2elf(imput,output):
     if os.path.isfile('/opt/pypack/bin/py2elf'):                           # if py2elf installed
-        os.system(f'py2elf -o {output} {imput}') 
+        os.system(f'py2elf -o {output} {imput}')
     elif os.path.isfile('./py2elf.py'):                                # if py2elf installed
         os.system(f'./py2elf.py -o {output} {imput}')               # if py2elf in same directory
     else:
@@ -89,7 +89,7 @@ if args.i and bool(args.no_compile) and args.f:                                #
     in_file=args.f
     with open(in_file,'r') as f:
         line1=f.readline()
-        if '#!/opt/pypack/bin/python' in line1:
+        if '#!/' in line1:                                                  # Check is bash/sh will know which prgm to exec the file with
             #thats cool
             print(f'{line1} in 1st line. that\'s cool!')
         else:
@@ -108,7 +108,7 @@ if args.purge:
     if pkg2purge == '*':                                            # We remove ALL installed pkg
         pkg_purge_all(pypack_dir+pypack_packagelst)
     else:                                                           # We only remove specified pkg
-        pkg_purge(f'/opt/pypack/bin/{pkg2purge}',pypack_dir+pypack_packagelst) 
+        pkg_purge(f'/opt/pypack/bin/{pkg2purge}',pypack_dir+pypack_packagelst)
 
 # PART OF CODE TO UPDATE EXISTING PACKAGE
 # ---------------------------------------
