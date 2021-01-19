@@ -8,15 +8,18 @@ Check out our new [repository](https://github.com/toto112358/pypack-repo)
 
 Compiling
 ---------
-Run `make` to compile it to a 64-bit .deb package you can later install
+Run `make deb` to compile it to a 64-bit .deb package you can later install
 
 Run `make clean` to remove all compiled binaries
 
 Install:
 --------
-Two ways:
-- Run `sudo make dependencies` to install all required packages, then `sudo make install` to install pypack.
-- Or run `sudo make dependencies && make && dpkg -i pypack.deb && make clean` on debian-based distributions.
+### Debian-based distros
+- Run `sudo make dependencies && make && dpkg -i pypack.deb && make clean` on debian-based distributions.
+
+### Any other distros
+- Run `make -s print_dependencies` and pipe the output with `xargs` to the package manager of your choice or install them manually.
+- Then run `make install`.
 
 Uninstall:
 ---------
@@ -34,7 +37,7 @@ Run `pypack -p '*'` *(or `pypack -p \*`)* in order to uninstall **ALL** pypack p
 
 Known issues:
 ------------
-- `pypack -p *` won't work since bash interprets `*` as everything. So you have to escape the `*` character
+- `pypack -p *` won't work since `*` is a special character.
 
 To do:
 ------
@@ -46,13 +49,11 @@ To do:
     - Instructions to install and/or uninstall properly
 6. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
 8. Add a [cheat sheet](cheat_sheet.md)
-9. Add an option to show all installed packages (PRIORITY)
-10. Add a package repository
+	- edit: I want this software to be so stupid that a cheat cheat wont be necessary
+10. Add an option to show all installed packages (PRIORITY)
+11. Add a package repository
     - `pypack repo install [pkg name]` would download and install [pkg name]
+    - Or a `pyget` command would do the job.
 12. Ask community to make commits on my script
 13. Add support for python3 project that need MULTIPLE files
 14. Add some VIM propaganda in easter eggs
-
-
-
-

@@ -3,6 +3,7 @@ build:
 	python3 src/py2elf.py -o src/opt/pypack/bin/pypack src/pypack.py
 
 deb:
+	make build
 	dpkg-deb --build src pypack.deb
 
 clean:
@@ -12,7 +13,6 @@ clean:
 install:
 	make build
 	make -C src/
-	export $(PATH) = $(PATH):/opt/pypack/bin/
 
 uninstall:
 	sudo python3 src/pypack.py -p '*'
@@ -20,4 +20,7 @@ uninstall:
 	sudo rm -r /opt/pypack
 
 dependencies:
-	sudo apt -y install gcc cython3 python3-pip python3-lxml
+	sudo apt -y install gcc cython3
+
+print_dependencies:
+	echo gcc cython			# in some distros, cython3 is referred to cython
