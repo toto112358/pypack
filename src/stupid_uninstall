@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+sudo dpkg --purge pypack && sudo rm -r /opt/pypack && sudo rm -- "$0"

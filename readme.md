@@ -25,8 +25,13 @@ Install:
 
 Uninstall:
 ---------
-Run `sudo make uninstall` or if you installed it via dpkg run `sudo dpkg --purge pypack && sudo rm -r /opt/pypack`
+Run `sudo make uninstall`
 
+If you installed it using `dpkg`
+- Run `sudo dpkg --purge pypack && sudo rm -r /opt/pypack`
+
+If you used stupid install:
+- Run `stupid_uninstall` in a shell
 Usage:
 ------
 Run `pypack -h` to get all commands. Here are a few basic examples:

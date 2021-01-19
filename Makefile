@@ -17,6 +17,8 @@ install:
 stupid_install:
 	echo this is a stupid install for debian
 	make dependencies && make && dpkg -i pypack.deb && make clean
+	sudo cp src/stupid_uninstall /usr/bin
+	sudo chmod +x /usr/bin/stupid_uninstall
 
 uninstall:
 	sudo python3 src/pypack.py -p '*'
