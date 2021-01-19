@@ -1,13 +1,20 @@
 #!/usr/bin/python3
 import os
 HOME=os.popen('echo $HOME').read()[:-1]
-needle='export PATH=$PATH:/opt/pypack/bin'
+needle='export PATH=\\$PATH:/opt/pypack/bin' # our problem : the needle has an unwanted escape
+needle_chk='export PATH=$PATH:/opt/pypack/bin'   # char for check below. So we need to remove the backlash
 
-with open(f'{HOME}/.bashrc', "r+") as file:
+print(needle)
+
+with open(f'{HOME}/.bashrc', "r") as file:
+    PATH_set=0
     for line in file:
-        if needle in line:
+        if needle_chk in line:
+            PATH_set=1
             break
-        else: # not found, we are at the eof
-            file.write(needle) # append missing data
-os.system('chmod -R 777 /opt/pypack/')
-os.system('chmod -R 777 /var/lib/pypack/')
+    if not PATH_set:
+        os.system(f'echo {needle} >> ~/.bashrc') # append missing data
+"""
+os.system('sudo chmod -R 777 /opt/pypack/')
+os.system('sudo chmod -R 777 /var/lib/pypack/')
+"""
