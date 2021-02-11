@@ -49,19 +49,22 @@ Known issues:
 
 To do:
 ------
-1. Add dependencies support (e.g. a python package can be dependant on another one)
-3. Make pypack installation for ALL users instead of current user only
-4. Add configuration file to customize install (i.e. install root version or non-root)
-5. Create a .PYPACK package extention
+1. Make it super easy to create a pypack package. Just specify the directory and main
+file(s) and pypack will do the rest.
+2. Rewrite someday?
+3. Add dependencies support (e.g. a python package can be dependant on another one)
+4. Make pypack installation for ALL users instead of current user only
+5. Add configuration file to customize install (i.e. install root version or non-root)
+6. Create a .PYPACK package extention
     - Dependencies support
     - Instructions to install and/or uninstall properly
-6. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
+7. ~Add package versionning to downgrade packages to backed-up versions~ (maybe not a good indea)
 8. Add a [cheat sheet](cheat_sheet.md)
 	- edit: I want this software to be so stupid that a cheat sheet wont be necessary
-10. Add an option to show all installed packages (PRIORITY)
-11. Add a package repository
+9. Add an option to show all installed packages (PRIORITY)
+10. Add a package repository
     - `pypack repo install [pkg name]` would download and install [pkg name]
     - Or a `pyget` command would do the job.
-12. Ask community to make commits on my script
-13. Add support for python3 project that need MULTIPLE files
-14. Add some VIM propaganda in easter eggs
+11. Ask community to make commits on my script
+12. Add support for python3 project that need MULTIPLE files
+13. Add some VIM propaganda in easter eggs
