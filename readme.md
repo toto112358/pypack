@@ -1,4 +1,9 @@
 # PYPACK !!!
+Note:  It is not a compiler but a *wrapper* around `gcc`.  It is
+spaghetti code, it has to be rewritten.  The really useful -- and
+time-saving stuff is py2elf, the gcc wrapper that compiles a cython
+file.
+
 Just a simple python3 package manager & compiler. It doesn't even require root access!!!
 
 Compiling python3 programs to ELF makes them considerably faster.
